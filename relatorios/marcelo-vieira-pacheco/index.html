@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Modernizei Tax Intelligence — Análise Preliminar 2027</title>
+<style>
+:root{
+  --navy:#0d2f3f; --navy2:#153f50; --green:#15956f; --green2:#26b58b;
+  --mint:#eaf6f1; --bg:#f7faf9; --text:#1f3038; --muted:#63747c;
+  --line:#dbe6e3; --white:#ffffff; --amber:#c78900; --red:#af4b43;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--text)}
+.topbar{height:74px;background:#fff;border-bottom:1px solid #edf2f0;display:flex;align-items:center}
+.topbar .inner{max-width:1200px;margin:auto;width:100%;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:900;color:var(--navy);letter-spacing:.04em;font-size:20px}
+.brand span{color:var(--green)}
+.nav{display:flex;gap:28px;color:#45616d;font-size:14px}
+.cta{background:var(--navy);color:white;padding:13px 18px;border-radius:6px;font-weight:800}
+.wrap{max-width:1200px;margin:auto;padding:34px 24px 64px}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center;padding:30px 0 26px;position:relative}
+.hero:after{content:"";position:absolute;right:-140px;top:-40px;width:500px;height:360px;border-radius:50%;background:radial-gradient(circle,#d8f3e9 0,#eff8f5 48%,transparent 70%);z-index:-1}
+.eyebrow{display:flex;align-items:center;gap:10px;color:#46685d;font-weight:800;font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+.eyebrow:before{content:"";width:28px;height:2px;background:var(--green)}
+h1{font-family:Georgia,'Times New Roman',serif;font-weight:500;color:var(--navy);font-size:54px;line-height:1.05;margin:18px 0 18px}
+h1 em{font-style:normal;color:var(--green)}
+.hero p{font-size:17px;line-height:1.6;color:#59707a;margin:0 0 18px}
+.badges{display:flex;gap:10px;flex-wrap:wrap}
+.badge{background:#fff;border:1px solid var(--line);padding:9px 12px;border-radius:999px;font-size:12px;font-weight:800;color:#496069}
+.badge.hot{background:#fff5cf;border-color:#efd77b;color:#775600}
+.hero-card{background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:0 14px 40px rgba(13,47,63,.08)}
+.hero-card .small{font-size:11px;letter-spacing:.12em;color:#7b918b;text-transform:uppercase;font-weight:800}
+.hero-card .reco{font-size:28px;color:var(--navy);font-weight:900;margin:8px 0 14px}
+.status-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.status-box{background:#f3f8f6;border-radius:12px;padding:13px}
+.status-box b{display:block;color:var(--navy);font-size:16px}
+.status-box span{font-size:11px;color:#78908a;text-transform:uppercase}
+section{margin-top:30px}
+.section-title{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:12px}
+.section-title h2{margin:0;font-size:21px;color:var(--navy)}
+.section-title .hint{font-size:12px;color:var(--muted)}
+.grid{display:grid;gap:14px}
+.kpis{grid-template-columns:repeat(6,1fr)}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
+.kpi .label{font-size:10px;color:#81928d;text-transform:uppercase;letter-spacing:.07em}
+.kpi .value{margin-top:7px;color:var(--navy);font-weight:900;font-size:21px}
+.kpi.green .value{color:var(--green)}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
+.cols{grid-template-columns:1fr 1fr}
+.scenarios{grid-template-columns:repeat(3,1fr)}
+.scenario{position:relative;overflow:hidden}
+.scenario.best{border:2px solid var(--green);box-shadow:0 10px 28px rgba(21,149,111,.12)}
+.scenario .rank{font-size:11px;font-weight:900;color:#6b827a;text-transform:uppercase}
+.scenario.best .rank{color:var(--green)}
+.scenario h3{color:var(--navy);margin:7px 0 4px;font-size:19px}
+.amount{font-size:30px;font-weight:900;color:var(--navy);margin:8px 0 2px}
+.rate{font-size:13px;color:var(--muted)}
+.bar{height:8px;background:#eef3f1;border-radius:999px;margin:16px 0 10px;overflow:hidden}
+.bar span{display:block;height:100%;background:var(--navy2);border-radius:999px}
+.scenario.best .bar span{background:var(--green)}
+.delta{font-size:12px;font-weight:800;color:#5d716a}
+.proj{display:inline-block;margin-top:10px;padding:6px 8px;border-radius:999px;background:#fff4cc;color:#795a00;font-size:11px;font-weight:900}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+th,td{padding:12px 13px;border-bottom:1px solid var(--line);text-align:left;font-size:13px}
+th{background:#eef5f2;color:var(--navy);font-size:12px}
+tr:last-child td{border-bottom:none}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.good{color:var(--green);font-weight:900}
+.warn{color:var(--amber);font-weight:900}
+.bad{color:var(--red);font-weight:900}
+.callout{border-left:4px solid var(--green);background:#f2faf6}
+.callout.warnbox{border-left-color:#d2a00f;background:#fff9e7}
+.callout h3{margin:0 0 8px;color:var(--navy)}
+.callout p{margin:0;line-height:1.58;color:#4f666e}
+.formula-grid{grid-template-columns:repeat(4,1fr)}
+.formula-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px}
+.formula-card .t{font-size:11px;color:#82938e;text-transform:uppercase;font-weight:800}
+.formula-card .v{font-size:20px;color:var(--navy);font-weight:900;margin:8px 0 2px}
+.formula-card .s{font-size:12px;color:var(--muted)}
+.timeline{grid-template-columns:repeat(4,1fr)}
+.year{font-size:25px;font-weight:900;color:var(--green);font-family:Georgia,'Times New Roman',serif}
+.timeline p{color:#5a7078;font-size:13px;line-height:1.55;margin-bottom:0}
+.footer{margin-top:34px;border-top:1px solid var(--line);padding-top:18px;color:#768983;font-size:12px;line-height:1.5}
+@media(max-width:920px){
+  .nav{display:none}.hero{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}
+  .scenarios,.cols,.formula-grid,.timeline{grid-template-columns:1fr}h1{font-size:42px}
+}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="inner">
+  <div class="brand">MODERNIZEI <span>INTELLIGENCE</span></div>
+  <div class="nav"><span>Soluções</span><span>Intelligence</span><span>Segmentos</span><span>Sobre</span></div>
+  <div class="cta">Diagnóstico tributário ↗</div>
+</div></div>
+<div class="wrap">
+  <div class="hero">
+    <div>
+      <div class="eyebrow">Estratégia contábil e fiscal</div>
+      <h1>Decisão tributária com <em>impacto econômico real</em></h1>
+      <p>MARCELO VIEIRA PACHECO DISTRIBUIÇÃO DE BEBIDAS E ALIMENTOS LTDA · Ribeirão Preto/SP. Comparação projetada para 2027 entre Lucro Presumido, Simples com IBS/CBS dentro e Simples com IBS/CBS por fora.</p>
+      <div class="badges">
+        <span class="badge">100% consumidor final</span>
+        <span class="badge">0 funcionários</span>
+        <span class="badge hot">ANÁLISE PRELIMINAR · v1.3</span>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="small">Visão estratégica</div>
+      <div class="reco">Manter Lucro Presumido</div>
+      <div class="status-row">
+        <div class="status-box"><span>Economia vs Simples dentro</span><b>R$ 10.632/ano</b></div>
+        <div class="status-box"><span>Economia vs Simples por fora</span><b>R$ 21.148/ano</b></div>
+        <div class="status-box"><span>VRC do cliente</span><b>R$ 0</b></div>
+        <div class="status-box"><span>Alíquota projetada regular</span><b>9,1%</b></div>
+      </div>
+    </div>
+  </div>
+  <section>
+    <div class="section-title"><h2>Indicadores de decisão</h2><span class="hint">Base: R$ 95 mil/mês · CMV 75% · 80% ICMS-ST</span></div>
+    <div class="grid kpis">
+      <div class="kpi green"><div class="label">Regime recomendado</div><div class="value">Lucro Presumido</div></div>
+      <div class="kpi"><div class="label">Carga LP</div><div class="value">5,46%</div></div>
+      <div class="kpi"><div class="label">Carga Simples dentro</div><div class="value">6,39%</div></div>
+      <div class="kpi"><div class="label">Carga Simples fora</div><div class="value">7,31%</div></div>
+      <div class="kpi"><div class="label">ICA</div><div class="value">72/100</div></div>
+      <div class="kpi"><div class="label">IER</div><div class="value">68/100</div></div>
+    </div>
+  </section>
+  <section>
+    <div class="section-title"><h2>Comparação tributária — dados da simulação</h2><span class="hint">Valores mensais e anuais efetivamente calculados</span></div>
+    <div class="grid scenarios">
+      <div class="card scenario best">
+        <div class="rank">1º lugar</div><h3>Lucro Presumido</h3>
+        <div class="amount">R$ 5.182,25</div><div class="rate">5,46% da receita · R$ 62.187/ano</div>
+        <div class="bar"><span style="width:74.6%"></span></div>
+        <div class="delta">Base de comparação</div>
+      </div>
+      <div class="card scenario">
+        <div class="rank">2º lugar</div><h3>Simples — IBS/CBS dentro</h3>
+        <div class="amount">R$ 6.068,28</div><div class="rate">6,39% da receita · R$ 72.819,36/ano</div>
+        <div class="bar"><span style="width:87.4%"></span></div>
+        <div class="delta">+ R$ 886,03/mês vs LP</div>
+      </div>
+      <div class="card scenario">
+        <div class="rank">3º lugar</div><h3>Simples — IBS/CBS por fora</h3>
+        <div class="amount">R$ 6.944,58</div><div class="rate">7,31% da receita · R$ 83.334,96/ano</div>
+        <div class="bar"><span style="width:100%"></span></div>
+        <div class="delta">+ R$ 1.762,33/mês vs LP</div>
+        <span class="proj">9,1% = PROJEÇÃO</span>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="section-title"><h2>Memória econômica do Simples por fora</h2><span class="hint">Aqui está o dado que o gráfico anterior não mostrava</span></div>
+    <div class="grid formula-grid">
+      <div class="formula-card"><div class="t">DAS remanescente</div><div class="v">R$ 4.783,33</div><div class="s">Após retirar CBS + IBS do DAS e segregar ICMS-ST</div></div>
+      <div class="formula-card"><div class="t">Débito IBS/CBS</div><div class="v">R$ 8.645,00</div><div class="s">R$ 95.000 × 9,1%</div></div>
+      <div class="formula-card"><div class="t">Crédito IBS/CBS</div><div class="v">R$ 6.483,75</div><div class="s">CMV 75% × 9,1% — premissa creditável</div></div>
+      <div class="formula-card"><div class="t">IBS/CBS líquido</div><div class="v">R$ 2.161,25</div><div class="s">Débito menos créditos</div></div>
+    </div>
+  </section>
+  <section>
+    <div class="grid cols">
+      <div class="card callout">
+        <h3>Por que o Lucro Presumido ainda vence?</h3>
+        <p>No cenário-base, o comércio tem CMV elevado e gera créditos relevantes de IBS/CBS. Mesmo assim, a soma do DAS remanescente com o IBS/CBS regular projetado a 9,1% deixa o Simples por fora acima do Lucro Presumido. Como a empresa é 100% B2C, não existe ganho comercial de crédito ao cliente para compensar essa diferença.</p>
+      </div>
+      <div class="card callout warnbox">
+        <h3>Área cinzenta verdadeira</h3>
+        <p>Não é mais B2B/B2C nem folha: ambos já estão definidos. O ponto de ruptura está no percentual real de compras creditáveis, no CMV, no mix NCM/CEST e no percentual efetivo de receitas com ICMS-ST. Os XMLs substituem essas premissas.</p>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="section-title"><h2>DRE comparativa resumida</h2><span class="hint">Antes das demais despesas operacionais</span></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Linha</th><th class="num">Lucro Presumido</th><th class="num">Simples dentro</th><th class="num">Simples fora</th></tr></thead>
+      <tbody>
+        <tr><td>Receita bruta</td><td class="num">R$ 95.000,00</td><td class="num">R$ 95.000,00</td><td class="num">R$ 95.000,00</td></tr>
+        <tr><td>Tributos</td><td class="num good">R$ 5.182,25</td><td class="num">R$ 6.068,28</td><td class="num">R$ 6.944,58</td></tr>
+        <tr><td>CMV — premissa 75%</td><td class="num">R$ 71.250,00</td><td class="num">R$ 71.250,00</td><td class="num">R$ 71.250,00</td></tr>
+        <tr><td>Compliance adicional</td><td class="num">R$ 0,00</td><td class="num">R$ 0,00</td><td class="num">R$ 800,00</td></tr>
+        <tr><td><b>Resultado econômico comparável</b></td><td class="num good"><b>R$ 18.567,75</b></td><td class="num"><b>R$ 17.681,72</b></td><td class="num"><b>R$ 16.005,42</b></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <section>
+    <div class="grid cols">
+      <div class="card">
+        <h3 style="margin-top:0;color:var(--navy)">Impacto no cliente</h3>
+        <p style="line-height:1.6;color:#536a72"><b>VRC = R$ 0.</b> O cliente é consumidor final. Portanto, o Simples por fora não possui aqui a justificativa comercial típica do B2B. O foco é preço final e margem líquida.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0;color:var(--navy)">Preço de indiferença</h3>
+        <p style="line-height:1.6;color:#536a72">Mantida a mesma margem, o Lucro Presumido suporta aproximadamente <b>R$ 886,03/mês</b> a mais de redução de preço frente ao Simples dentro e <b>R$ 1.762,33/mês</b> frente ao Simples por fora, antes do compliance adicional.</p>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="section-title"><h2>Ponto de equilíbrio do faturamento</h2><span class="hint">Simples dentro x Lucro Presumido</span></div>
+    <div class="grid cols">
+      <div class="card callout">
+        <h3>Ponto de ruptura: R$ 56,4 mil/mês</h3>
+        <p>Mantidas as premissas atuais, o empate técnico ocorre em aproximadamente <b>R$ 56.401,60 de faturamento mensal</b>. Nesse ponto, os dois regimes geram cerca de <b>R$ 3.076,71/mês</b> de tributos. <b>Abaixo desse patamar, o Simples Nacional com IBS/CBS dentro tende a ser mais econômico; acima dele, o Lucro Presumido tende a vencer.</b></p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0;color:var(--navy)">Como o ponto foi calculado</h3>
+        <p style="line-height:1.6;color:#536a72">Carga do Lucro Presumido: <b>5,455%</b>. Com 80% de ICMS-ST, apenas <b>73,20%</b> da alíquota efetiva cheia do DAS permanece. Para empatar, o Simples precisa de alíquota efetiva cheia de <b>7,4522%</b>, o que corresponde a RBT12 de aproximadamente <b>R$ 676.819,21</b>, ou <b>R$ 56.401,60/mês</b>.</p>
+      </div>
+    </div>
+    <div class="table-wrap" style="margin-top:14px"><table>
+      <thead><tr><th>Faturamento mensal</th><th class="num">Simples dentro</th><th class="num">Lucro Presumido</th><th class="num">Diferença</th><th>Mais econômico</th></tr></thead>
+      <tbody>
+        <tr><td>R$ 50.000</td><td class="num good">R$ 2.631,54</td><td class="num">R$ 2.727,50</td><td class="num">- R$ 95,96</td><td class="good">Simples dentro</td></tr>
+        <tr><td><b>R$ 56.400</b></td><td class="num"><b>R$ 3.076,60</b></td><td class="num"><b>R$ 3.076,62</b></td><td class="num"><b>- R$ 0,02</b></td><td class="warn">Empate técnico</td></tr>
+        <tr><td>R$ 60.000</td><td class="num">R$ 3.326,94</td><td class="num good">R$ 3.273,00</td><td class="num">+ R$ 53,94</td><td class="good">Lucro Presumido</td></tr>
+        <tr><td>R$ 75.000</td><td class="num">R$ 4.501,80</td><td class="num good">R$ 4.091,25</td><td class="num">+ R$ 410,55</td><td class="good">Lucro Presumido</td></tr>
+        <tr><td>R$ 95.000</td><td class="num">R$ 6.068,28</td><td class="num good">R$ 5.182,25</td><td class="num">+ R$ 886,03</td><td class="good">Lucro Presumido</td></tr>
+      </tbody>
+    </table></div>
+    <div class="card callout warnbox" style="margin-top:14px">
+      <h3>Leitura estratégica</h3>
+      <p>Esse ponto de R$ 56,4 mil <b>não é universal</b>. Ele depende das premissas atuais de 80% de ICMS-ST, CMV creditável de 75% e IBS/CBS regular projetado em 9,1%. Quando os XMLs e o CMV real forem recebidos, o ponto de ruptura será recalculado.</p>
+    </div>
+  </section>
+  <section>
+    <div class="section-title"><h2>9,1%: projeção, não promessa</h2></div>
+    <div class="card callout warnbox">
+      <h3>Marco de outubro ≠ alíquota definitiva</h3>
+      <p>Para esta simulação adotamos <b>9,1%</b> como premissa projetada do IBS/CBS no regime regular. O cronograma oficial prevê o envio dos cálculos do TCU ao Senado até <b>30/10/2026</b>, quando teremos um parâmetro muito mais concreto. A fixação definitiva da alíquota de referência da CBS para 2027, entretanto, poderá ocorrer até <b>15/12/2026</b>. Esta análise deverá ser automaticamente revisada quando o parâmetro oficial for publicado.</p>
+    </div>
+  </section>
+  <section>
+    <div class="section-title"><h2>Transição 2026–2033</h2></div>
+    <div class="grid timeline">
+      <div class="card"><div class="year">2026</div><p>Preparação e parametrização. Decisão do Simples/IBS-CBS para 2027 exige atenção ainda em 2026.</p></div>
+      <div class="card"><div class="year">2027–28</div><p>CBS entra, IBS inicia e as novas partilhas do Simples passam a produzir efeitos.</p></div>
+      <div class="card"><div class="year">2029–32</div><p>ICMS é reduzido gradualmente, aumentando a importância dos créditos do IBS.</p></div>
+      <div class="card"><div class="year">2033</div><p>Modelo cheio. Regime deverá ser revisto com alíquotas definitivas, mix real e Imposto Seletivo.</p></div>
+    </div>
+  </section>
+  <section>
+    <div class="grid cols">
+      <div class="card callout">
+        <h3>Pulo do Gato</h3>
+        <p>Com 100% B2C e zero empregados, a decisão deixa de ser “Simples é melhor porque tem folha” ou “por fora é melhor porque dá crédito ao cliente”. O jogo passa a ser <b>densidade de créditos próprios + ICMS-ST + margem</b>. Com as premissas atuais, o Lucro Presumido continua na frente.</p>
+      </div>
+      <div class="card callout warnbox">
+        <h3>Oportunidade fora do radar</h3>
+        <p>Importar XMLs e classificar compras e vendas por NCM/CEST para medir o crédito real. Se o CMV creditável for muito maior que 75%, o Simples por fora melhora; se for menor ou houver restrições relevantes ao crédito, piora. Essa é a variável que vale dinheiro.</p>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="section-title"><h2>Dados necessários para transformar projeção em análise validada</h2></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Informação</th><th>Uso na decisão</th><th>Prioridade</th></tr></thead>
+      <tbody>
+        <tr><td>XML de entradas e saídas — últimos 3 meses</td><td>NCM, CEST, ICMS-ST e base real de créditos</td><td class="bad">CRÍTICA</td></tr>
+        <tr><td>CMV/compras mensais reais</td><td>Substituir a premissa de 75% e fechar IBS/CBS líquido</td><td class="bad">CRÍTICA</td></tr>
+        <tr><td>Relatório de vendas por produto</td><td>Confirmar mix e exposição ao Imposto Seletivo</td><td class="warn">ALTA</td></tr>
+        <tr><td>Pró-labore, se houver</td><td>Fechar previdência residual</td><td>MÉDIA</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+  <div class="footer">
+    ANÁLISE PRELIMINAR · v1.3 · 26/08/2026. Premissas de cenário: faturamento R$ 95.000/mês, CMV creditável 75%, 80% de receitas em ICMS-ST e alíquota regular IBS/CBS de 9,1% como projeção. Valores deverão ser atualizados quando os XMLs e parâmetros oficiais forem confirmados.
+  </div>
+</div>
+</body></html>
